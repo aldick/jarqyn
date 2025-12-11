@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: jarqyn-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/Jarqyn/backend
+      - /Jarqyn/backend/__pycache__
+      - /Jarqyn/backend/app/__pycache__
+    environment:
+      - PYTHONUNBUFFERED=1
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped
+
+  bot:
+    build:
+      context: ./bot
+    container_name: jarqyn-bot
+    volumes:
+      - ./bot:/app
+    env_file:
+      - ./bot/.env
+    environment:
+      - API_URL=http://backend:8000/api/reports/
+    depends_on:
+      - backend
+    restart: unless-stopped

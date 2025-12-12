@@ -7,7 +7,7 @@ from fastapi import UploadFile
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 UPLOAD_DIR = BASE_DIR / "backend" / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
